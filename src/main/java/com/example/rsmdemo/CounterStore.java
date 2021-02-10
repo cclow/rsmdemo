@@ -20,20 +20,12 @@ public class CounterStore {
 		return this.valueSink.asFlux();
 	}
 
-	public void increment(long delta) {
-		// emit new state into value$
-		this.valueSink.tryEmitNext(this.state.addAndGet(delta));
-	}
-
-	public void decrement(long delta) {
-		this.valueSink.tryEmitNext(this.state.addAndGet(-delta));
-	}
-
 	public void dispatch(CounterIncrementAction counterIncrementAction) {
-		this.increment(counterIncrementAction.getDelta());
+		// emit new state into value$
+		this.valueSink.tryEmitNext(this.state.addAndGet(counterIncrementAction.getDelta()));
 	}
 
 	public void dispatch(CounterDecrementAction counterDecrementAction) {
-		this.decrement(counterDecrementAction.getDelta());
+		this.valueSink.tryEmitNext(this.state.addAndGet(-counterDecrementAction.getDelta()));
 	}
 }

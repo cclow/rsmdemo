@@ -28,39 +28,6 @@ class CounterStoreTests {
 		            .verifyComplete();
 	}
 
-	@Test void incrementByDelta() {
-		long delta = randomLong();
-		StepVerifier.create(subject.take(2))
-		            .then(() -> counterStore.increment(delta))
-		            .expectNext(initial, initial + delta)
-		            .verifyComplete();
-	}
-
-	@Test void decrementByDelta() {
-		long delta = randomLong();
-		StepVerifier.create(subject.take(2))
-		            .then(() -> counterStore.decrement(delta))
-		            .expectNext(initial, initial - delta)
-		            .verifyComplete();
-	}
-
-	@Test void incrementAndDecrement() {
-		long delta1 = randomLong();
-		long delta2 = randomLong();
-		long delta3 = randomLong();
-		long delta4 = randomLong();
-		StepVerifier.create(subject.take(5))
-		            .then(() -> {
-			            counterStore.decrement(delta1);
-			            counterStore.increment(delta2);
-			            counterStore.increment(delta3);
-			            counterStore.decrement(delta4);
-		            })
-		            .expectNext(initial, initial - delta1, initial - delta1 + delta2, initial - delta1 + delta2 + delta3,
-		                        initial - delta1 + delta2 + delta3 - delta4)
-		            .verifyComplete();
-	}
-
 	@Test void dispatchIncrementAction() {
 		long delta = randomLong();
 		StepVerifier.create(subject.take(2))
