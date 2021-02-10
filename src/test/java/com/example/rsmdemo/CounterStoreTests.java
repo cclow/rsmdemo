@@ -15,7 +15,8 @@ class CounterStoreTests {
 	@BeforeEach void setUp() {
 		initial = randomLong();
 		counterStore = new CounterStore(initial);
-		subject = counterStore.value$();
+		subject = counterStore.value$()
+		                      .map(Counter::getValue);
 	}
 
 	private long randomLong() {
