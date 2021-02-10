@@ -35,4 +35,12 @@ class CounterStoreTests {
 		            .expectNext(initial, initial + delta)
 		            .verifyComplete();
 	}
+
+	@Test void decrementByDelta() {
+		long delta = randomLong();
+		StepVerifier.create(subject.take(2))
+		            .then(() -> counterStore.decrement(delta))
+		            .expectNext(initial, initial - delta)
+		            .verifyComplete();
+	}
 }

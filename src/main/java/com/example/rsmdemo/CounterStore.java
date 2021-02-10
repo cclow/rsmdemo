@@ -23,4 +23,9 @@ public class CounterStore {
 		// emit new state into value$
 		this.valueSink.tryEmitNext(this.state);
 	}
+
+	public void decrement(long delta) {
+		this.state -= delta;
+		this.valueSink.tryEmitNext(this.state);
+	}
 }
