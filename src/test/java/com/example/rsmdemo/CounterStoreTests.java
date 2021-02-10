@@ -60,4 +60,12 @@ class CounterStoreTests {
 		                        initial - delta1 + delta2 + delta3 - delta4)
 		            .verifyComplete();
 	}
+
+	@Test void dispatchIncrementAction() {
+		long delta = randomLong();
+		StepVerifier.create(subject.take(2))
+		            .then(() -> counterStore.dispatch(new CounterIncrementAction(delta)))
+		            .expectNext(initial, initial + delta)
+		            .verifyComplete();
+	}
 }

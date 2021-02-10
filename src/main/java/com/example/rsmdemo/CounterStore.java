@@ -28,4 +28,8 @@ public class CounterStore {
 	public void decrement(long delta) {
 		this.valueSink.tryEmitNext(this.state.addAndGet(-delta));
 	}
+
+	public void dispatch(CounterIncrementAction counterIncrementAction) {
+		this.increment(counterIncrementAction.getDelta());
+	}
 }
