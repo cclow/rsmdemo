@@ -1,6 +1,6 @@
 package com.example.rsmdemo;
 
-public class CounterIncrementAction implements CounterAction {
+public class CounterIncrementAction implements Action<Counter> {
 	private final long delta;
 
 	public CounterIncrementAction(long delta) {
