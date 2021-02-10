@@ -1,14 +1,10 @@
 package com.example.rsmdemo;
 
-public class CounterDecrementAction {
+public class CounterDecrementAction implements CounterAction {
 	private final long delta;
 
 	public CounterDecrementAction(long delta) {
 		this.delta = delta;
-	}
-
-	public long getDelta() {
-		return delta;
 	}
 
 	public Counter apply(Counter counter) {

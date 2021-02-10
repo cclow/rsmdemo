@@ -20,12 +20,8 @@ public class CounterStore {
 		return this.valueSink.asFlux();
 	}
 
-	public void dispatch(CounterIncrementAction counterIncrementAction) {
+	public void dispatch(CounterAction counterAction) {
 		// emit new state into value$
-		this.valueSink.tryEmitNext(this.state.updateAndGet(counterIncrementAction::apply));
-	}
-
-	public void dispatch(CounterDecrementAction counterDecrementAction) {
-		this.valueSink.tryEmitNext(this.state.updateAndGet(counterDecrementAction::apply));
+		this.valueSink.tryEmitNext(this.state.updateAndGet(counterAction::apply));
 	}
 }
