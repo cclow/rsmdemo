@@ -76,4 +76,21 @@ class CounterStoreTests {
 		            .expectNext(initial, initial - delta)
 		            .verifyComplete();
 	}
+
+	@Test void dispatchIncrementAndDecrementActions() {
+		long delta1 = randomLong();
+		long delta2 = randomLong();
+		long delta3 = randomLong();
+		long delta4 = randomLong();
+		StepVerifier.create(subject.take(5))
+		            .then(() -> {
+			            counterStore.dispatch(new CounterDecrementAction(delta1));
+			            counterStore.dispatch(new CounterIncrementAction(delta2));
+			            counterStore.dispatch(new CounterIncrementAction(delta3));
+			            counterStore.dispatch(new CounterDecrementAction(delta4));
+		            })
+		            .expectNext(initial, initial - delta1, initial - delta1 + delta2, initial - delta1 + delta2 + delta3,
+		                        initial - delta1 + delta2 + delta3 - delta4)
+		            .verifyComplete();
+	}
 }
