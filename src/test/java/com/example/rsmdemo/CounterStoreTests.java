@@ -9,12 +9,12 @@ import java.util.Random;
 
 class CounterStoreTests {
 	long initial;
-	CounterStore counterStore;
+	Store<Counter> counterStore;
 	Flux<Long> subject;
 
 	@BeforeEach void setUp() {
 		initial = randomLong();
-		counterStore = new CounterStore(initial);
+		counterStore = new Store<>(new Counter(initial));
 		subject = counterStore.value$()
 		                      .map(Counter::getValue);
 	}
