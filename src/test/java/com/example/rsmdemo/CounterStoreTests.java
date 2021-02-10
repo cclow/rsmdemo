@@ -68,4 +68,12 @@ class CounterStoreTests {
 		            .expectNext(initial, initial + delta)
 		            .verifyComplete();
 	}
+
+	@Test void dispatchDecrementAction() {
+		long delta = randomLong();
+		StepVerifier.create(subject.take(2))
+		            .then(() -> counterStore.dispatch(new CounterDecrementAction(delta)))
+		            .expectNext(initial, initial - delta)
+		            .verifyComplete();
+	}
 }

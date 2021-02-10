@@ -32,4 +32,8 @@ public class CounterStore {
 	public void dispatch(CounterIncrementAction counterIncrementAction) {
 		this.increment(counterIncrementAction.getDelta());
 	}
+
+	public void dispatch(CounterDecrementAction counterDecrementAction) {
+		this.decrement(counterDecrementAction.getDelta());
+	}
 }
