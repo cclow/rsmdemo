@@ -4,16 +4,19 @@ import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CounterStoreTests {
 
 	@Test void initialValue() {
-		CounterStore counterStore = new CounterStore(10L);
+		long initial = new Random().nextLong();
+		CounterStore counterStore = new CounterStore(initial);
 		Flux<Long> subject = counterStore.value$();
 
 		StepVerifier.create(subject)
-		            .expectNext(10L)
+		            .expectNext(initial)
 		            .verifyComplete();
 	}
 }
