@@ -10,4 +10,8 @@ public class CounterDecrementAction {
 	public long getDelta() {
 		return delta;
 	}
+
+	public Counter apply(Counter counter) {
+		return new Counter(counter.getValue() - this.delta);
+	}
 }

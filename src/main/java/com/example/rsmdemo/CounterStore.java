@@ -22,12 +22,10 @@ public class CounterStore {
 
 	public void dispatch(CounterIncrementAction counterIncrementAction) {
 		// emit new state into value$
-		this.valueSink.tryEmitNext(
-				this.state.updateAndGet((counter) -> new Counter(counter.getValue() + counterIncrementAction.getDelta())));
+		this.valueSink.tryEmitNext(this.state.updateAndGet(counterIncrementAction::apply));
 	}
 
 	public void dispatch(CounterDecrementAction counterDecrementAction) {
-		this.valueSink.tryEmitNext(
-				this.state.updateAndGet((counter) -> new Counter(counter.getValue() - counterDecrementAction.getDelta())));
+		this.valueSink.tryEmitNext(this.state.updateAndGet(counterDecrementAction::apply));
 	}
 }
