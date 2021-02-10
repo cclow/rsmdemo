@@ -1,4 +1,4 @@
-package com.example.rsmdemo;
+package com.example.rsmdemo.reactivestore;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;

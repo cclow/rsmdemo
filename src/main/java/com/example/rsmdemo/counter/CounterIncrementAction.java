@@ -1,4 +1,6 @@
-package com.example.rsmdemo;
+package com.example.rsmdemo.counter;
+
+import com.example.rsmdemo.reactivestore.Action;
 
 public class CounterIncrementAction implements Action<Counter> {
 	private final long delta;

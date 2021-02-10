@@ -1,4 +1,4 @@
-package com.example.rsmdemo;
+package com.example.rsmdemo.counter;
 
 public class Counter {
 	private final long value;
